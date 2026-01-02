@@ -152,8 +152,3 @@ Roles are randomly shuffled and assigned to players based on the configuration:
 - ✅ Played word pair tracking (localStorage)
 - ✅ Responsive design
 - ✅ Dark mode support
-- ✅ Smooth game flow with multiple phases
-
-## License
-
-This project is private and not licensed for public use.
