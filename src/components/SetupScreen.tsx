@@ -6,6 +6,8 @@ import { Input } from '@/components/ui/input'
 import { GAME_CONSTANTS } from '@/constants/game'
 import type { SetupData, WordPair } from '@/types/game'
 import { wordPairs } from '@/data/words'
+import { useTheme } from '@/lib/useTheme'
+import { Moon, Sun } from 'lucide-react'
 
 const PLAYED_WORD_PAIRS_KEY = 'imposter-game-played-word-pairs'
 
@@ -37,6 +39,7 @@ interface SetupScreenProps {
 }
 
 export function SetupScreen({ onStartGame }: SetupScreenProps) {
+  const { theme, toggleTheme } = useTheme()
   const [totalPlayers, setTotalPlayers] = useState<number>(4)
   const [spyPupCount, setSpyPupCount] = useState<number>(GAME_CONSTANTS.maxSpyPupCount[totalPlayers])
   const [confusedKittenCount, setConfusedKittenCount] = useState<number>(GAME_CONSTANTS.maxConfusedKittenCount[totalPlayers])
@@ -65,7 +68,20 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
   }, [availableWordPairKeys.join(',')])
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-background overflow-y-scroll" style={{ scrollbarWidth: 'auto' }}>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-background overflow-y-scroll relative" style={{ scrollbarWidth: 'auto' }}>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={toggleTheme}
+        className="absolute top-4 right-4 h-10 w-10 rounded-full"
+        aria-label="Toggle dark mode"
+      >
+        {theme === 'dark' ? (
+          <Sun className="h-5 w-5" />
+        ) : (
+          <Moon className="h-5 w-5" />
+        )}
+      </Button>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl">Imposter Game</CardTitle>
