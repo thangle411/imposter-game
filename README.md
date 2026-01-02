@@ -27,16 +27,30 @@ The goal is for the Good Kittens to identify the Spy Pups, while the Spy Pups tr
 - Players must keep their role and word secret
 - Spy Pups will see "No Word" instead of a word
 
+### Clue Phase
+- Each player gives one word clue related to their given word
+- Players must not repeat another player's clue
+- Players must not say the given word itself
+- Spy Pups must give a clue without knowing the word, making this phase crucial for detection
+
 ### Discussion Phase
-- After all players have seen their roles, the discussion begins
-- Players take turns giving clues or asking questions
 - Good Kittens try to identify who doesn't know the word
 - Spy Pups try to blend in and guess the word
 - Confused Kittens may seem suspicious because they know a different word
 
-### Results Phase
-- After discussion, the real word is revealed
-- Players can see if they were correct in their deductions
+### Elimination Phase
+- After each discussion phase, all players vote to eliminate one player
+- **If a Spy Pup is eliminated:**
+  - The eliminated Spy Pup can attempt to guess the word
+  - If they guess correctly, the Spy Pups and Confused Kittens win the game
+  - If they guess incorrectly, the game continues with the remaining players
+- **If a Good Kitten or Confused Kitten is eliminated:**
+  - The eliminated player must reveal themselves by checking against the real word in the app
+  - The game continues with the remaining players
+- The game continues with alternating Discussion and Elimination phases until only 2 players remain. Start with the person to the left of the eliminated player.
+- **End Game Condition:**
+  - If both remaining players are Good Kittens, the Good Kittens win
+  - If both remaining players are not Good Kittens (i.e., at least one is a Spy Pup or Confused Kitten), the Spy Pups and Confused Kittens win
 
 ## Game Configuration
 
