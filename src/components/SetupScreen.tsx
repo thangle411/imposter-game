@@ -5,7 +5,32 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/input'
 import { GAME_CONSTANTS } from '@/constants/game'
 import type { SetupData, WordPair } from '@/types/game'
-import { wordPairs, getRandomPair } from '@/data/words'
+import { wordPairs } from '@/data/words'
+
+const PLAYED_WORD_PAIRS_KEY = 'imposter-game-played-word-pairs'
+
+function getPlayedWordPairKeys(): Set<string> {
+  try {
+    const stored = localStorage.getItem(PLAYED_WORD_PAIRS_KEY)
+    if (stored) {
+      const keys = JSON.parse(stored) as string[]
+      return new Set(keys)
+    }
+  } catch (error) {
+    console.error('Error reading played word pairs from localStorage:', error)
+  }
+  return new Set<string>()
+}
+
+function markWordPairAsPlayed(key: string): void {
+  try {
+    const playedKeys = getPlayedWordPairKeys()
+    playedKeys.add(key)
+    localStorage.setItem(PLAYED_WORD_PAIRS_KEY, JSON.stringify(Array.from(playedKeys)))
+  } catch (error) {
+    console.error('Error saving played word pair to localStorage:', error)
+  }
+}
 
 interface SetupScreenProps {
   onStartGame: (setupData: SetupData) => void
@@ -17,14 +42,27 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
   const [confusedKittenCount, setConfusedKittenCount] = useState<number>(GAME_CONSTANTS.maxConfusedKittenCount[totalPlayers])
   const [goodKittenCount, setGoodKittenCount] = useState<number>(totalPlayers - spyPupCount - confusedKittenCount)
   const [wordPairMode, setWordPairMode] = useState<'select' | 'custom'>('select')
-  const [selectedWordPairKey, setSelectedWordPairKey] = useState<string>(Object.keys(wordPairs)[0] || '')
   const [useRandomPair, setUseRandomPair] = useState<boolean>(false)
   const [customMainWord, setCustomMainWord] = useState<string>('')
   const [customRelatedWord, setCustomRelatedWord] = useState<string>('')
 
+  // Get available word pairs (excluding played ones)
+  const playedKeys = getPlayedWordPairKeys()
+  const availableWordPairs = Object.entries(wordPairs).filter(([key]) => !playedKeys.has(key))
+  const availableWordPairKeys = availableWordPairs.map(([key]) => key)
+  
+  const [selectedWordPairKey, setSelectedWordPairKey] = useState<string>(availableWordPairKeys[0] || '')
+
   useEffect(() => {
     setGoodKittenCount(totalPlayers - spyPupCount - confusedKittenCount)
   }, [totalPlayers, spyPupCount, confusedKittenCount])
+
+  // Update selected key when available pairs change
+  useEffect(() => {
+    if (availableWordPairKeys.length > 0 && !availableWordPairKeys.includes(selectedWordPairKey)) {
+      setSelectedWordPairKey(availableWordPairKeys[0])
+    }
+  }, [availableWordPairKeys.join(',')])
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-background overflow-y-scroll" style={{ scrollbarWidth: 'auto' }}>
@@ -139,22 +177,28 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
                 <label htmlFor="wordPair" className="text-sm font-medium">
                   Select Word Pair
                 </label>
-                <Select
-                  value={selectedWordPairKey}
-                  onValueChange={setSelectedWordPairKey}
-                  disabled={useRandomPair}
-                >
-                  <SelectTrigger id="wordPair" className="w-full h-12 text-base">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent onCloseAutoFocus={(e) => e.preventDefault()}>
-                    {Object.entries(wordPairs).map(([key, pair]) => (
-                      <SelectItem key={key} value={key}>
-                        {pair.main} / {pair.related}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                {availableWordPairs.length === 0 ? (
+                  <div className="text-sm text-muted-foreground p-3 border rounded-md">
+                    All word pairs have been played. Please use custom words or clear localStorage to reset.
+                  </div>
+                ) : (
+                  <Select
+                    value={selectedWordPairKey}
+                    onValueChange={setSelectedWordPairKey}
+                    disabled={useRandomPair}
+                  >
+                    <SelectTrigger id="wordPair" className="w-full h-12 text-base">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent onCloseAutoFocus={(e) => e.preventDefault()}>
+                      {availableWordPairs.map(([key, pair]) => (
+                        <SelectItem key={key} value={key}>
+                          {pair.main} / {pair.related}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
               </div>
             </>
           ) : (
@@ -188,12 +232,26 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
           <Button
             onClick={() => {
               let wordPair: WordPair
+              let wordPairKey: string | null = null
+              
               if (wordPairMode === 'select') {
                 if (useRandomPair) {
-                  const random = getRandomPair()
-                  wordPair = random.pair
+                  // Get random pair from available (unplayed) pairs
+                  if (availableWordPairs.length === 0) {
+                    alert('All word pairs have been played! Please use custom words or clear localStorage.')
+                    return
+                  }
+                  const randomIndex = Math.floor(Math.random() * availableWordPairs.length)
+                  const [key, pair] = availableWordPairs[randomIndex]
+                  wordPair = pair
+                  wordPairKey = key
                 } else {
+                  if (!selectedWordPairKey || !wordPairs[selectedWordPairKey]) {
+                    alert('Please select a word pair or use custom words.')
+                    return
+                  }
                   wordPair = wordPairs[selectedWordPairKey]
+                  wordPairKey = selectedWordPairKey
                 }
               } else {
                 if (!customMainWord.trim() || !customRelatedWord.trim()) {
@@ -204,7 +262,14 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
                   main: customMainWord.trim(),
                   related: customRelatedWord.trim()
                 }
+                // Custom words don't have keys, so we don't track them
               }
+              
+              // Mark word pair as played if it has a key
+              if (wordPairKey) {
+                markWordPairAsPlayed(wordPairKey)
+              }
+              
               onStartGame({ totalPlayers, spyPupCount, confusedKittenCount, wordPair })
             }}
             className="w-full h-12 text-base"

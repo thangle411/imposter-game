@@ -1,6 +1,10 @@
 import type { WordPair } from '@/types/game'
 
 export const wordPairs: Record<string, WordPair> = {
+  0: {
+    main: 'Main',
+    related: 'Related',
+  },
   1: {
     main: 'Hand',
     related: 'Arm'
