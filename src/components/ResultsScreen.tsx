@@ -11,14 +11,18 @@ import {
   DialogTitle,
 } from './ui/dialog'
 
+import { Footer } from './Footer'
+
 interface ResultsScreenProps {
   realWord: string
   onPlayAgain: () => void
+  onOpenTimerSettings: () => void
 }
 
 export function ResultsScreen({
   realWord,
-  onPlayAgain
+  onPlayAgain,
+  onOpenTimerSettings
 }: ResultsScreenProps) {
   const [isHolding, setIsHolding] = useState(false)
   const [showConfirmDialog, setShowConfirmDialog] = useState(false)
@@ -65,7 +69,7 @@ export function ResultsScreen({
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-background select-none">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-background select-none pb-24">
       <Card className="w-full max-w-md">
         <div className="space-y-6 py-4">
            <CardHeader className="spacy-y-1 p-2 mb-3">
@@ -120,6 +124,7 @@ export function ResultsScreen({
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      <Footer onOpenTimerSettings={onOpenTimerSettings} />
     </div>
   )
 }

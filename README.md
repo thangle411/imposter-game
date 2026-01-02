@@ -2,6 +2,10 @@
 
 A social deduction game where players must figure out who knows the secret word and who doesn't. Built with React, TypeScript, and Vite.
 
+## Demo
+
+https://imposter-game-tl.netlify.app/
+
 ## Game Overview
 
 In this game, players are assigned different roles with different knowledge:

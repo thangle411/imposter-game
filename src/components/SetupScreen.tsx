@@ -65,7 +65,7 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
 
   useEffect(() => {
     setGoodKittenCount(totalPlayers - spyPupCount - confusedKittenCount)
-  }, [totalPlayers, spyPupCount, confusedKittenCount])
+  }, [totalPlayers, spyPupCount, confusedKittenCount])  
 
   // Update selected key when available pairs change
   useEffect(() => {
@@ -137,7 +137,7 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
       </Button>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-3xl">Imposter Game</CardTitle>
+          <CardTitle className="flex justify-center items-center"><img src='/logo.png' width={150}/></CardTitle>
           <CardDescription className="text-base mt-2">
             Good kittens, confused kittens, and (a) spy pup(s)
           </CardDescription>

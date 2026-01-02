@@ -1,13 +1,15 @@
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Footer } from "./Footer";
 
 interface PlayersReadyScreenProps {
-    handleShowResults: () => void
+    handleShowResults: () => void;
+    onOpenTimerSettings: () => void;
 }
 
-export function PlayersReadyScreen({handleShowResults}: PlayersReadyScreenProps) {
+export function PlayersReadyScreen({handleShowResults, onOpenTimerSettings}: PlayersReadyScreenProps) {
     return (
-        <div className="min-h-screen flex items-center justify-center p-4 bg-background select-none">
+        <div className="min-h-screen flex items-center justify-center p-4 bg-background select-none pb-24">
             <Card className="w-full max-w-md">
                 <CardHeader className="text-center">
                     <CardTitle className="text-3xl">Everyone is ready!</CardTitle>
@@ -21,6 +23,7 @@ export function PlayersReadyScreen({handleShowResults}: PlayersReadyScreenProps)
                     </Button>
                 </CardContent>
             </Card>
+            <Footer onOpenTimerSettings={onOpenTimerSettings} />
         </div>
     )
 }

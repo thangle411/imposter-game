@@ -3,6 +3,7 @@ import { SetupScreen } from '@/components/SetupScreen'
 import { WordRevealScreen } from '@/components/WordRevealScreen'
 import { ResultsScreen } from '@/components/ResultsScreen'
 import { PlayersReadyScreen } from '@/components/PlayersReadyScreen'
+import { TimerSettingsScreen } from '@/components/TimerSettingsScreen'
 import type { Player, GameState, SetupData } from '@/types/game'
 import { assignRoles, assignWords } from '@/lib/gameLogic'
 
@@ -12,7 +13,9 @@ function App() {
     phase: 'setup',
     realWord: '',
     currentPlayerIndex: 0,
+    timerMinutes: 2, // Default to 2 minutes
   })
+  const [previousPhase, setPreviousPhase] = useState<GameState['phase']>('setup')
 
   const handleStartGame = ({ totalPlayers, spyPupCount, confusedKittenCount, wordPair }: SetupData) => {
     const players: Player[] = Array.from({ length: totalPlayers }, (_, i) => ({
@@ -57,8 +60,33 @@ function App() {
       players: [],
       phase: 'setup',
       currentPlayerIndex: 0,
-      realWord: ''
+      realWord: '',
+      timerMinutes: gameState.timerMinutes || 2
     })
+  }
+
+  const handleOpenTimerSettings = () => {
+    setPreviousPhase(gameState.phase)
+    setGameState(prev => ({
+      ...prev,
+      phase: 'timer-settings'
+    }))
+  }
+
+  const handleSaveTimerSettings = (minutes: number) => {
+    setGameState(prev => ({
+      ...prev,
+      timerMinutes: minutes,
+      // Don't navigate away - stay on timer-settings screen
+      phase: prev.phase === 'timer-settings' ? 'timer-settings' : previousPhase
+    }))
+  }
+
+  const handleCancelTimerSettings = () => {
+    setGameState(prev => ({
+      ...prev,
+      phase: previousPhase
+    }))
   }
 
   // Render appropriate screen based on phase
@@ -76,7 +104,10 @@ function App() {
 
     case 'players-ready':
       return (
-        <PlayersReadyScreen handleShowResults={handleShowResults}></PlayersReadyScreen>
+        <PlayersReadyScreen 
+          handleShowResults={handleShowResults}
+          onOpenTimerSettings={handleOpenTimerSettings}
+        />
       )
 
     case 'result-check':
@@ -84,6 +115,16 @@ function App() {
         <ResultsScreen
           realWord={gameState.realWord}
           onPlayAgain={handlePlayAgain}
+          onOpenTimerSettings={handleOpenTimerSettings}
+        />
+      )
+
+    case 'timer-settings':
+      return (
+        <TimerSettingsScreen
+          currentTimerMinutes={gameState.timerMinutes || 2}
+          onSave={handleSaveTimerSettings}
+          onCancel={handleCancelTimerSettings}
         />
       )
 

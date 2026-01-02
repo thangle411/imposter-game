@@ -1,6 +1,6 @@
 export type Role = 'good-kitten' | 'confused-kitten' | 'spy-pup'
 
-export type GamePhase = 'setup' | 'word-reveal' | 'players-ready' | 'result-check'
+export type GamePhase = 'setup' | 'word-reveal' | 'players-ready' | 'result-check' | 'timer-settings'
 
 export interface SetupData {
   totalPlayers: number;
@@ -28,5 +28,6 @@ export interface GameState {
   currentPlayerIndex: number;
   realWord: string;
   category?: string;
+  timerMinutes?: number;
 }
 
