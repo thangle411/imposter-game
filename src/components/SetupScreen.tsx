@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/input'
 import { GAME_CONSTANTS } from '@/constants/game'
 import type { SetupData, WordPair } from '@/types/game'
-import { wordPairs } from '@/data/words'
+import { wordPairs, getRandomPair } from '@/data/words'
 
 interface SetupScreenProps {
   onStartGame: (setupData: SetupData) => void
@@ -18,6 +18,7 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
   const [goodKittenCount, setGoodKittenCount] = useState<number>(totalPlayers - spyPupCount - confusedKittenCount)
   const [wordPairMode, setWordPairMode] = useState<'select' | 'custom'>('select')
   const [selectedWordPairKey, setSelectedWordPairKey] = useState<string>(Object.keys(wordPairs)[0] || '')
+  const [useRandomPair, setUseRandomPair] = useState<boolean>(false)
   const [customMainWord, setCustomMainWord] = useState<string>('')
   const [customRelatedWord, setCustomRelatedWord] = useState<string>('')
 
@@ -121,26 +122,41 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
             </Select>
           </div>
           {wordPairMode === 'select' ? (
-            <div className="space-y-2">
-              <label htmlFor="wordPair" className="text-sm font-medium">
-                Select Word Pair
-              </label>
-              <Select
-                value={selectedWordPairKey}
-                onValueChange={setSelectedWordPairKey}
-              >
-                <SelectTrigger id="wordPair" className="w-full h-12 text-base">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent onCloseAutoFocus={(e) => e.preventDefault()}>
-                  {Object.entries(wordPairs).map(([key, pair]) => (
-                    <SelectItem key={key} value={key}>
-                      {pair.main} / {pair.related}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+            <>
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="randomPair"
+                  checked={useRandomPair}
+                  onChange={(e) => setUseRandomPair(e.target.checked)}
+                  className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary"
+                />
+                <label htmlFor="randomPair" className="text-sm font-medium cursor-pointer">
+                  Randomly select a word pair
+                </label>
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="wordPair" className="text-sm font-medium">
+                  Select Word Pair
+                </label>
+                <Select
+                  value={selectedWordPairKey}
+                  onValueChange={setSelectedWordPairKey}
+                  disabled={useRandomPair}
+                >
+                  <SelectTrigger id="wordPair" className="w-full h-12 text-base">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent onCloseAutoFocus={(e) => e.preventDefault()}>
+                    {Object.entries(wordPairs).map(([key, pair]) => (
+                      <SelectItem key={key} value={key}>
+                        {pair.main} / {pair.related}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </>
           ) : (
             <>
               <div className="space-y-2">
@@ -173,7 +189,12 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
             onClick={() => {
               let wordPair: WordPair
               if (wordPairMode === 'select') {
-                wordPair = wordPairs[selectedWordPairKey]
+                if (useRandomPair) {
+                  const random = getRandomPair()
+                  wordPair = random.pair
+                } else {
+                  wordPair = wordPairs[selectedWordPairKey]
+                }
               } else {
                 if (!customMainWord.trim() || !customRelatedWord.trim()) {
                   alert('Please enter both words')

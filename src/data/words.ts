@@ -321,6 +321,86 @@ export const wordPairs: Record<string, WordPair> = {
     main: 'Feather',
     related: 'Wing'
   },
+  81: {
+    main: 'Circus',
+    related: 'Zoo'
+  },
+  82: {
+    main: 'Diary',
+    related: 'Secrets'
+  },
+  83: {
+    main: 'Probiotics drink',
+    related: 'Yogurt'
+  },
+  84: {
+    main: 'Chef',
+    related: 'Recipe'
+  },
+  85: {
+    main: 'SUV',
+    related: 'Pickup Truck'
+  },
+  86: {
+    main: 'Pie',
+    related: 'Cheesecake'
+  },
+  87: {
+    main: 'Doctor',
+    related: 'Patient'
+  },
+  88: {
+    main: 'Ballet',
+    related: 'Dancing'
+  },
+  89: {
+    main: 'Shrimp',
+    related: 'Calamari'
+  },
+  90: {
+    main: 'Machine',
+    related: 'Robot'
+  },
+  91: {
+    main: 'Ant',
+    related: 'Cockroach'
+  },
+  92: {
+    main: 'Storm',
+    related: 'Flood'
+  },
+  93: {
+    main: 'Boring',
+    related: 'Normal'
+  },
+  94: {
+    main: 'Machine',
+    related: 'Robot'
+  },
+  95: {
+    main: 'Amazon',
+    related: 'Ebay'
+  },
+  96: {
+    main: 'Microwave',
+    related: 'Oven'
+  },
+  97: {
+    main: 'Umbrella',
+    related: 'Raincoat'
+  },
+  98: {
+    main: 'Camping',
+    related: 'Road trip'
+  },
+  99: {
+    main: 'Flash light',
+    related: 'Lamp'
+  },
+  100: {
+    main: 'Bicycle',
+    related: 'Transportation'
+  },
 }
 
 export function getRandomPair(): { name: string; pair: WordPair } {
