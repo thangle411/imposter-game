@@ -100,7 +100,7 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
       }
       wordPair = {
         main: customMainWord.trim(),
-        related: customRelatedWord.trim()
+        related: customRelatedWord.trim(),
       }
       // Custom words don't have keys, so we don't track them
     }

@@ -19,6 +19,7 @@ export interface Player {
 export interface WordPair {
   main: string;
   related: string
+  language?: 'english' | 'vietnamese'
 }
 
 export interface GameState {

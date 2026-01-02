@@ -1,410 +1,257 @@
 import type { WordPair } from '@/types/game'
 
 export const wordPairs: Record<string, WordPair> = {
-  0: {
-    main: 'Main',
-    related: 'Related',
-  },
-  1: {
-    main: 'Hand',
-    related: 'Arm'
-  },
-  2: {
-    main: 'Basketball',
-    related: 'Volleyball'
-  },
-  3: {
-    main: 'Rain',
-    related: 'Snow'
-  },
-  4: {
-    main: 'Phone',
-    related: 'Laptop'
-  },
-  5: {
-    main: 'Pizza',
-    related: 'Pie'
-  },
-  6: {
-    main: 'Flute',
-    related: 'Music'
-  },
-  7: {
-    main: 'Sun',
-    related: 'Planet'
-  },
-  8: {
-    main: 'Nike',
-    related: 'Adidas'
-  },
-  9: {
-    main: 'Library',
-    related: 'Bookstore'
-  },
-  10: {
-    main: 'Supermarket',
-    related: 'Convenience Store'
-  },
-  11: {
-    main: 'Doctor',
-    related: 'Dentist'
-  },
-  12: {
-    main: 'Concert',
-    related: 'Festival'
-  },
-  13: {
-    main: 'Island',
-    related: 'Beach'
-  },
-  14: {
-    main: 'Backpack',
-    related: 'Suitcase'
-  },
-  15: {
-    main: 'Lamp',
-    related: 'Light'
-  },
-  16: {
-    main: 'Hill',
-    related: 'Mountain'
-  },
-  17: {
-    main: 'Waterpark',
-    related: 'Amusement Park'
-  },
-  18: {
-    main: 'Taste',
-    related: 'Flavor'
-  },
-  19: {
-    main: 'Door',
-    related: 'Gate'
-  },
-  20: {
-    main: 'Wall',
-    related: 'Fence'
-  },
-  21: {
-    main: 'Boba',
-    related: 'Juice'
-  },
-  22: {
-    main: 'Pause',
-    related: 'Break'
-  },
-  23: {
-    main: 'Fear',
-    related: 'Anxiety'
-  },
-  24: {
-    main: 'Calm',
-    related: 'Peace'
-  },
-  25: {
-    main: 'Task',
-    related: 'Chore'
-  },
-  26: {
-    main: 'Signal',
-    related: 'Sign'
-  },
-  27: {
-    main: 'Noise',
-    related: 'Distraction'
-  },
-  28: {
-    main: 'Amusement Park',
-    related: 'Festival'
-  },
-  29: {
-    main: 'Safari Park',
-    related: 'Zoo'
-  },
-  30: {
-    main: 'Times Square',
-    related: 'Las Vegas'
-  },
-  31: {
-    main: 'Resort',
-    related: 'Hotel'
-  },
-  32: {
-    main: 'National Park',
-    related: 'State Park'
-  },
-  33: {
-    main: 'Food Court',
-    related: 'Marketplace'
-  },
-  34: {
-    main: 'Casino',
-    related: 'Resort'
-  },
-  35: {
-    main: 'Milkshake',
-    related: 'Smoothie'
-  },
-  36: {
-    main: 'Boardgames',
-    related: 'Chess'
-  },
-  37: {
-    main: 'Jeans',
-    related: 'Sweatpants'
-  },
-  38: {
-    main: 'Cheese',
-    related: 'Butter'
-  },
-  39: {
-    main: 'Flute',
-    related: 'Whistle'
-  },
-  40: {
-    main: 'Vacation',
-    related: 'Holiday'
-  },
-  41: {
-    main: 'Teris',
-    related: 'Candy Crush'
-  },
-  42: {
-    main: 'Pyramid',
-    related: 'Tomb'
-  },
-  43: {
-    main: 'Candle',
-    related: 'Wax'
-  },
-  44: {
-    main: 'Camouflage',
-    related: 'Invisible'
-  },
-  45: {
-    main: 'Spoon',
-    related: 'Bowl'
-  },
-  46: {
-    main: 'Dragon',
-    related: 'Dinosaur'
-  },
-  47: {
-    main: 'Spoon',
-    related: 'Bowl'
-  },
-  48: {
-    main: 'Football',
-    related: 'Baseball'
-  },
-  49: {
-    main: 'Lion',
-    related: 'Cat'
-  },
-  50: {
-    main: 'Architect',
-    related: 'Engineer'
-  },
-  51: {
-    main: 'Face Paint',
-    related: 'Makeup'
-  },
-  52: {
-    main: 'MSG',
-    related: 'Salt'
-  },
-  53: {
-    main: 'Youtube',
-    related: 'Videos'
-  },
-  54: {
-    main: 'Rach Dressing',
-    related: 'Mayonnaise'
-  },
-  55: {
-    main: 'Architect',
-    related: 'Engineer'
-  },
-  56: {
-    main: 'Mail',
-    related: 'Post Office'
-  },
-  57: {
-    main: 'Cookie',
-    related: 'Brownie'
-  },
-  58: {
-    main: 'Creme brule',
-    related: 'Flan'
-  },
-  59: {
-    main: 'Architect',
-    related: 'Engineer'
-  },
-  60: {
-    main: 'Alcohol',
-    related: 'Cocktail'
-  },
-  61: {
-    main: 'Thanksgiving',
-    related: 'Feaest'
-  },
-  62: {
-    main: 'Black Friday',
-    related: 'Discounts'
-  },
-  63: {
-    main: 'Taco',
-    related: 'Nacho dips'
-  },
-  64: {
-    main: 'Boxing',
-    related: 'MMA'
-  },
-  65: {
-    main: 'Milk',
-    related: 'Cream'
-  },
-  66: {
-    main: 'Light',
-    related: 'Electricity'
-  },
-  67: {
-    main: 'Baseball bat',
-    related: 'Golf club'
-  },
-  68: {
-    main: 'Floss',
-    related: 'Toothpick'
-  },
-  69: {
-    main: 'Police',
-    related: 'Army'
-  },
-  70: {
-    main: 'Ketchup',
-    related: 'Mustard'
-  },
-  71: {
-    main: 'Knight',
-    related: 'Armor'
-  },
-  72: {
-    main: 'Yoga pants',
-    related: 'Legging'
-  },
-  73: {
-    main: 'Thunder',
-    related: 'Fireworks'
-  },
-  74: {
-    main: 'Vampire',
-    related: 'Ghost'
-  },
-  75: {
-    main: 'Choir',
-    related: 'Musical'
-  },
-  76: {
-    main: 'Mustache',
-    related: 'Beard'
-  },
-  77: {
-    main: 'Mystery',
-    related: 'Detective'
-  },
-  78: {
-    main: 'Portable Potty',
-    related: 'Toilet'
-  },
-  79: {
-    main: 'Gold',
-    related: 'Diamond'
-  },
-  80: {
-    main: 'Feather',
-    related: 'Wing'
-  },
-  81: {
-    main: 'Circus',
-    related: 'Zoo'
-  },
-  82: {
-    main: 'Diary',
-    related: 'Secrets'
-  },
-  83: {
-    main: 'Probiotics drink',
-    related: 'Yogurt'
-  },
-  84: {
-    main: 'Chef',
-    related: 'Recipe'
-  },
-  85: {
-    main: 'SUV',
-    related: 'Pickup Truck'
-  },
-  86: {
-    main: 'Pie',
-    related: 'Cheesecake'
-  },
-  87: {
-    main: 'Doctor',
-    related: 'Patient'
-  },
-  88: {
-    main: 'Ballet',
-    related: 'Dancing'
-  },
-  89: {
-    main: 'Shrimp',
-    related: 'Calamari'
-  },
-  90: {
-    main: 'Machine',
-    related: 'Robot'
-  },
-  91: {
-    main: 'Ant',
-    related: 'Cockroach'
-  },
-  92: {
-    main: 'Storm',
-    related: 'Flood'
-  },
-  93: {
-    main: 'Boring',
-    related: 'Normal'
-  },
-  94: {
-    main: 'Machine',
-    related: 'Robot'
-  },
-  95: {
-    main: 'Amazon',
-    related: 'Ebay'
-  },
-  96: {
-    main: 'Microwave',
-    related: 'Oven'
-  },
-  97: {
-    main: 'Umbrella',
-    related: 'Raincoat'
-  },
-  98: {
-    main: 'Camping',
-    related: 'Road trip'
-  },
-  99: {
-    main: 'Flash light',
-    related: 'Lamp'
-  },
-  100: {
-    main: 'Bicycle',
-    related: 'Transportation'
-  },
+  0: { main: 'Main', related: 'Related', language: 'english' },
+  1: { main: 'Hand', related: 'Arm', language: 'english' },
+  2: { main: 'Basketball', related: 'Volleyball', language: 'english' },
+  3: { main: 'Rain', related: 'Snow', language: 'english' },
+  4: { main: 'Phone', related: 'Laptop', language: 'english' },
+  5: { main: 'Pizza', related: 'Pie', language: 'english' },
+  6: { main: 'Flute', related: 'Music', language: 'english' },
+  7: { main: 'Sun', related: 'Planet', language: 'english' },
+  8: { main: 'Nike', related: 'Adidas', language: 'english' },
+  9: { main: 'Library', related: 'Bookstore', language: 'english' },
+  10: { main: 'Supermarket', related: 'Convenience Store', language: 'english' },
+  11: { main: 'Doctor', related: 'Dentist', language: 'english' },
+  12: { main: 'Concert', related: 'Festival', language: 'english' },
+  13: { main: 'Island', related: 'Beach', language: 'english' },
+  14: { main: 'Backpack', related: 'Suitcase', language: 'english' },
+  15: { main: 'Lamp', related: 'Light', language: 'english' },
+  16: { main: 'Hill', related: 'Mountain', language: 'english' },
+  17: { main: 'Waterpark', related: 'Amusement Park', language: 'english' },
+  18: { main: 'Taste', related: 'Flavor', language: 'english' },
+  19: { main: 'Door', related: 'Gate', language: 'english' },
+  20: { main: 'Wall', related: 'Fence', language: 'english' },
+  21: { main: 'Boba', related: 'Juice', language: 'english' },
+  22: { main: 'Pause', related: 'Break', language: 'english' },
+  23: { main: 'Fear', related: 'Anxiety', language: 'english' },
+  24: { main: 'Calm', related: 'Peace', language: 'english' },
+  25: { main: 'Task', related: 'Chore', language: 'english' },
+  26: { main: 'Signal', related: 'Sign', language: 'english' },
+  27: { main: 'Noise', related: 'Distraction', language: 'english' },
+  28: { main: 'Amusement Park', related: 'Festival', language: 'english' },
+  29: { main: 'Safari Park', related: 'Zoo', language: 'english' },
+  30: { main: 'Times Square', related: 'Las Vegas', language: 'english' },
+  31: { main: 'Resort', related: 'Hotel', language: 'english' },
+  32: { main: 'National Park', related: 'State Park', language: 'english' },
+  33: { main: 'Food Court', related: 'Marketplace', language: 'english' },
+  34: { main: 'Casino', related: 'Resort', language: 'english' },
+  35: { main: 'Milkshake', related: 'Smoothie', language: 'english' },
+  36: { main: 'Boardgames', related: 'Chess', language: 'english' },
+  37: { main: 'Jeans', related: 'Sweatpants', language: 'english' },
+  38: { main: 'Cheese', related: 'Butter', language: 'english' },
+  39: { main: 'Flute', related: 'Whistle', language: 'english' },
+  40: { main: 'Vacation', related: 'Holiday', language: 'english' },
+  41: { main: 'Teris', related: 'Candy Crush', language: 'english' },
+  42: { main: 'Pyramid', related: 'Tomb', language: 'english' },
+  43: { main: 'Candle', related: 'Wax', language: 'english' },
+  44: { main: 'Camouflage', related: 'Invisible', language: 'english' },
+  45: { main: 'Spoon', related: 'Bowl', language: 'english' },
+  46: { main: 'Dragon', related: 'Dinosaur', language: 'english' },
+  47: { main: 'Spoon', related: 'Bowl', language: 'english' },
+  48: { main: 'Football', related: 'Baseball', language: 'english' },
+  49: { main: 'Lion', related: 'Cat', language: 'english' },
+  50: { main: 'Architect', related: 'Engineer', language: 'english' },
+  51: { main: 'Face Paint', related: 'Makeup', language: 'english' },
+  52: { main: 'MSG', related: 'Salt', language: 'english' },
+  53: { main: 'Youtube', related: 'Videos', language: 'english' },
+  54: { main: 'Rach Dressing', related: 'Mayonnaise', language: 'english' },
+  55: { main: 'Architect', related: 'Engineer', language: 'english' },
+  56: { main: 'Mail', related: 'Post Office', language: 'english' },
+  57: { main: 'Cookie', related: 'Brownie', language: 'english' },
+  58: { main: 'Creme brule', related: 'Flan', language: 'english' },
+  59: { main: 'Architect', related: 'Engineer', language: 'english' },
+  60: { main: 'Alcohol', related: 'Cocktail', language: 'english' },
+  61: { main: 'Thanksgiving', related: 'Feaest', language: 'english' },
+  62: { main: 'Black Friday', related: 'Discounts', language: 'english' },
+  63: { main: 'Taco', related: 'Nacho dips', language: 'english' },
+  64: { main: 'Boxing', related: 'MMA', language: 'english' },
+  65: { main: 'Milk', related: 'Cream', language: 'english' },
+  66: { main: 'Light', related: 'Electricity', language: 'english' },
+  67: { main: 'Baseball bat', related: 'Golf club', language: 'english' },
+  68: { main: 'Floss', related: 'Toothpick', language: 'english' },
+  69: { main: 'Police', related: 'Army', language: 'english' },
+  70: { main: 'Ketchup', related: 'Mustard', language: 'english' },
+  71: { main: 'Knight', related: 'Armor', language: 'english' },
+  72: { main: 'Yoga pants', related: 'Legging', language: 'english' },
+  73: { main: 'Thunder', related: 'Fireworks', language: 'english' },
+  74: { main: 'Vampire', related: 'Ghost', language: 'english' },
+  75: { main: 'Choir', related: 'Musical', language: 'english' },
+  76: { main: 'Mustache', related: 'Beard', language: 'english' },
+  77: { main: 'Mystery', related: 'Detective', language: 'english' },
+  78: { main: 'Portable Potty', related: 'Toilet', language: 'english' },
+  79: { main: 'Gold', related: 'Diamond', language: 'english' },
+  80: { main: 'Feather', related: 'Wing', language: 'english' },
+  81: { main: 'Circus', related: 'Zoo', language: 'english' },
+  82: { main: 'Diary', related: 'Secrets', language: 'english' },
+  83: { main: 'Probiotics drink', related: 'Yogurt', language: 'english' },
+  84: { main: 'Chef', related: 'Recipe', language: 'english' },
+  85: { main: 'SUV', related: 'Pickup Truck', language: 'english' },
+  86: { main: 'Pie', related: 'Cheesecake', language: 'english' },
+  87: { main: 'Doctor', related: 'Patient', language: 'english' },
+  88: { main: 'Ballet', related: 'Dancing', language: 'english' },
+  89: { main: 'Shrimp', related: 'Calamari', language: 'english' },
+  90: { main: 'Machine', related: 'Robot', language: 'english' },
+  91: { main: 'Ant', related: 'Cockroach', language: 'english' },
+  92: { main: 'Storm', related: 'Flood', language: 'english' },
+  93: { main: 'Boring', related: 'Normal', language: 'english' },
+  94: { main: 'Machine', related: 'Robot', language: 'english' },
+  95: { main: 'Amazon', related: 'Ebay', language: 'english' },
+  96: { main: 'Microwave', related: 'Oven', language: 'english' },
+  97: { main: 'Umbrella', related: 'Raincoat', language: 'english' },
+  98: { main: 'Camping', related: 'Road trip', language: 'english' },
+  99: { main: 'Flash light', related: 'Lamp', language: 'english' },
+  100: { main: 'Bicycle', related: 'Transportation', language: 'english' },
+  101: { main: 'Border', related: 'Checkpoint', language: 'english' },
+  102: { main: 'Volcano', related: 'Crater', language: 'english' },
+  103: { main: 'Phở', related: 'Bún bò', language: 'vietnamese' },
+  104: { main: 'Bánh mì', related: 'Xôi', language: 'vietnamese' },
+  105: { main: 'Cơm tấm', related: 'Cơm chiên', language: 'vietnamese' },
+  106: { main: 'Gỏi cuốn', related: 'Chả giò', language: 'vietnamese' },
+  107: { main: 'Bún chả', related: 'Bún thịt nướng', language: 'vietnamese' },
+  108: { main: 'Cháo', related: 'Súp', language: 'vietnamese' },
+  109: { main: 'Trà đá', related: 'Trà nóng', language: 'vietnamese' },
+  110: { main: 'Sữa đậu nành', related: 'Sữa tươi', language: 'vietnamese' },
+  111: { main: 'Nước mía', related: 'Sinh tố', language: 'vietnamese' },
+  112: { main: 'Cà phê sữa', related: 'Bạc xỉu', language: 'vietnamese' },
+  113: { main: 'Curiosity', related: 'Wonder', language: 'english' },
+  114: { main: 'Stability', related: 'Balance', language: 'english' },
+  115: { main: 'Creativity', related: 'Imagination', language: 'english' },
+  116: { main: 'Motivation', related: 'Incentive', language: 'english' },
+  117: { main: 'Pressure', related: 'Stressor', language: 'english' },
+  118: { main: 'Mentor', related: 'Advisor', language: 'english' },
+  119: { main: 'Intern', related: 'Trainee', language: 'english' },
+  120: { main: 'Founder', related: 'Co-creator', language: 'english' },
+  121: { main: 'Documentary', related: 'Biography', language: 'english' },
+  122: { main: 'Anime', related: 'Cartoon', language: 'english' },
+  123: { main: 'Livestream', related: 'Recording', language: 'english' },
+  124: { main: 'Doormat', related: 'Rug', language: 'english' },
+  125: { main: 'Chandelier', related: 'Pendant', language: 'english' },
+  126: { main: 'Wardrobe', related: 'Closet', language: 'english' },
+  127: { main: 'Heatwave', related: 'Drought', language: 'english' },
+  128: { main: 'Chill', related: 'Thoải mái', language: 'vietnamese' },
+  129: { main: 'Căng', related: 'Áp lực', language: 'vietnamese' },
+  130: { main: 'Ổn áp', related: 'Ngon lành', language: 'vietnamese' },
+  131: { main: 'Mệt xỉu', related: 'Đuối sức', language: 'vietnamese' },
+  132: { main: 'Xịn', related: 'Chất lượng', language: 'vietnamese' },
+  133: { main: 'Phèn', related: 'Kém', language: 'vietnamese' },
+  134: { main: 'Gắt', related: 'Căng thẳng', language: 'vietnamese' },
+  135: { main: 'Dễ thương', related: 'Đáng yêu', language: 'vietnamese' },
+  136: { main: 'Khó chịu', related: 'Bực bội', language: 'vietnamese' },
+  137: { main: 'Vui vẻ', related: 'Hào hứng', language: 'vietnamese' },
+  138: { main: 'Tám chuyện', related: 'Buôn dưa', language: 'vietnamese' },
+  139: { main: 'Nói dóc', related: 'Xạo', language: 'vietnamese' },
+  140: { main: 'Thật thà', related: 'Thẳng thắn', language: 'vietnamese' },
+  141: { main: 'Ngại', related: 'Mắc cỡ', language: 'vietnamese' },
+  142: { main: 'Tự tin', related: 'Bản lĩnh', language: 'vietnamese' },
+  143: { main: 'Lười', related: 'Uể oải', language: 'vietnamese' },
+  144: { main: 'Siêng', related: 'Chăm chỉ', language: 'vietnamese' },
+  145: { main: 'Chảnh', related: 'Kiêu', language: 'vietnamese' },
+  146: { main: 'Dễ dãi', related: 'Thoáng', language: 'vietnamese' },
+  147: { main: 'Khó tính', related: 'Kén chọn', language: 'vietnamese' },
+  148: { main: 'Deadline', related: 'Hạn chót', language: 'vietnamese' },
+  149: { main: 'Tăng ca', related: 'Làm thêm', language: 'vietnamese' },
+  150: { main: 'Nghỉ xả hơi', related: 'Thư giãn', language: 'vietnamese' },
+  151: { main: 'Họp hành', related: 'Bàn bạc', language: 'vietnamese' },
+  152: { main: 'Báo cáo', related: 'Thống kê', language: 'vietnamese' },
+  153: { main: 'Kế hoạch', related: 'Dự định', language: 'vietnamese' },
+  154: { main: 'Ý tưởng', related: 'Sáng kiến', language: 'vietnamese' },
+  155: { main: 'Giải pháp', related: 'Cách xử lý', language: 'vietnamese' },
+  156: { main: 'Rắc rối', related: 'Phiền phức', language: 'vietnamese' },
+  157: { main: 'Ổn định', related: 'Vững vàng', language: 'vietnamese' },
+  158: { main: 'Quán cà phê', related: 'Tiệm nước', language: 'vietnamese' },
+  159: { main: 'Quán nhậu', related: 'Lẩu nướng', language: 'vietnamese' },
+  160: { main: 'Ăn vặt', related: 'La cà', language: 'vietnamese' },
+  161: { main: 'Trà sữa', related: 'Nước ngọt', language: 'vietnamese' },
+  162: { main: 'Cơm bụi', related: 'Cơm bình dân', language: 'vietnamese' },
+  163: { main: 'Ăn khuya', related: 'Lót dạ', language: 'vietnamese' },
+  164: { main: 'No căng', related: 'No nê', language: 'vietnamese' },
+  165: { main: 'Thèm', related: 'Muốn ăn', language: 'vietnamese' },
+  166: { main: 'Ngán', related: 'Chán ăn', language: 'vietnamese' },
+  167: { main: 'Mặn mà', related: 'Đậm đà', language: 'vietnamese' },
+  168: { main: 'Đi chơi', related: 'Dạo phố', language: 'vietnamese' },
+  169: { main: 'Du lịch', related: 'Phượt', language: 'vietnamese' },
+  170: { main: 'Ở nhà', related: 'Nằm nghỉ', language: 'vietnamese' },
+  171: { main: 'Hẹn hò', related: 'Đi date', language: 'vietnamese' },
+  172: { main: 'Tụ tập', related: 'Họp mặt', language: 'vietnamese' },
+  173: { main: 'Về quê', related: 'Thăm nhà', language: 'vietnamese' },
+  174: { main: 'Lạc đường', related: 'Đi nhầm', language: 'vietnamese' },
+  175: { main: 'Kẹt xe', related: 'Ùn tắc', language: 'vietnamese' },
+  176: { main: 'Đi sớm', related: 'Đến trước', language: 'vietnamese' },
+  177: { main: 'Về muộn', related: 'Trễ giờ', language: 'vietnamese' },
+  178: { main: 'Drama', related: 'Lùm xùm', language: 'vietnamese' },
+  179: { main: 'Hóng chuyện', related: 'Xem ké', language: 'vietnamese' },
+  180: { main: 'Nổi tiếng', related: 'Hot', language: 'vietnamese' },
+  181: { main: 'Bị phốt', related: 'Dính scandal', language: 'vietnamese' },
+  182: { main: 'Thả thính', related: 'Gây chú ý', language: 'vietnamese' },
+  183: { main: 'Crush', related: 'Cảm nắng', language: 'vietnamese' },
+  184: { main: 'Thích thầm', related: 'Đơn phương', language: 'vietnamese' },
+  185: { main: 'Chia tay', related: 'Tan vỡ', language: 'vietnamese' },
+  186: { main: 'Quay lại', related: 'Tái hợp', language: 'vietnamese' },
+  187: { main: 'Làm lành', related: 'Hòa giải', language: 'vietnamese' },
+  188: { main: 'Tiết kiệm', related: 'Dè xẻn', language: 'vietnamese' },
+  189: { main: 'Mạnh tay', related: 'Chi nhiều', language: 'vietnamese' },
+  190: { main: 'Hết tiền', related: 'Cháy túi', language: 'vietnamese' },
+  191: { main: 'Có lương', related: 'Nhận tiền', language: 'vietnamese' },
+  192: { main: 'Đắt đỏ', related: 'Giá cao', language: 'vietnamese' },
+  193: { main: 'Rẻ bèo', related: 'Giá thấp', language: 'vietnamese' },
+  194: { main: 'Đáng tiền', related: 'Xứng đáng', language: 'vietnamese' },
+  195: { main: 'Lỗ vốn', related: 'Thua lỗ', language: 'vietnamese' },
+  196: { main: 'Có lời', related: 'Sinh lợi', language: 'vietnamese' },
+  197: { main: 'Đầu tư', related: 'Góp vốn', language: 'vietnamese' },
+  198: { main: 'Ngẫu hứng', related: 'Tùy hứng', language: 'vietnamese' },
+  199: { main: 'Quen thuộc', related: 'Thân quen', language: 'vietnamese' },
+  200: { main: 'Lạ lẫm', related: 'Xa lạ', language: 'vietnamese' },
+  201: { main: 'Chill phết', related: 'Thoải mái ghê', language: 'vietnamese' },
+  202: { main: 'Căng cực', related: 'Áp lực nặng', language: 'vietnamese' },
+  203: { main: 'Ổn ghê', related: 'Ổn áp', language: 'vietnamese' },
+  204: { main: 'Mệt đứt hơi', related: 'Kiệt sức', language: 'vietnamese' },
+  205: { main: 'Xịn xò', related: 'Ngon nghẻ', language: 'vietnamese' },
+  206: { main: 'Phèn ỉa', related: 'Tệ hại', language: 'vietnamese' },
+  207: { main: 'Gắt ghê', related: 'Khó chịu', language: 'vietnamese' },
+  208: { main: 'Dễ cưng', related: 'Dễ thương', language: 'vietnamese' },
+  209: { main: 'Bực mình', related: 'Cáu gắt', language: 'vietnamese' },
+  210: { main: 'Vui quá trời', related: 'Phấn khích', language: 'vietnamese' },
+  211: { main: 'Buôn chuyện', related: 'Tám', language: 'vietnamese' },
+  212: { main: 'Xạo ke', related: 'Nói dóc', language: 'vietnamese' },
+  213: { main: 'Thiệt tình', related: 'Thật thà', language: 'vietnamese' },
+  214: { main: 'Mắc cỡ', related: 'Ngại ngùng', language: 'vietnamese' },
+  215: { main: 'Tự tin ghê', related: 'Bản lĩnh', language: 'vietnamese' },
+  216: { main: 'Lười chảy thây', related: 'Uể oải', language: 'vietnamese' },
+  217: { main: 'Siêng năng', related: 'Chăm chỉ', language: 'vietnamese' },
+  218: { main: 'Chảnh chó', related: 'Kiêu căng', language: 'vietnamese' },
+  219: { main: 'Dễ tính', related: 'Thoải mái', language: 'vietnamese' },
+  220: { main: 'Khó ở', related: 'Khó chịu', language: 'vietnamese' },
+  221: { main: 'Chạy deadline', related: 'Gấp việc', language: 'vietnamese' },
+  222: { main: 'Tăng ca sml', related: 'Làm thêm giờ', language: 'vietnamese' },
+  223: { main: 'Xả stress', related: 'Giải tỏa', language: 'vietnamese' },
+  224: { main: 'Họp lê thê', related: 'Họp dài', language: 'vietnamese' },
+  225: { main: 'Báo cáo gấp', related: 'Nộp gấp', language: 'vietnamese' },
+  226: { main: 'Lên plan', related: 'Lập kế hoạch', language: 'vietnamese' },
+  227: { main: 'Nảy số', related: 'Có ý tưởng', language: 'vietnamese' },
+  228: { main: 'Giải quyết lẹ', related: 'Xử lý nhanh', language: 'vietnamese' },
+  229: { main: 'Rối não', related: 'Đau đầu', language: 'vietnamese' },
+  230: { main: 'Ổn định dần', related: 'Vững hơn', language: 'vietnamese' },
+  231: { main: 'La cà quán xá', related: 'Đi ăn vặt', language: 'vietnamese' },
+  232: { main: 'Nhậu nhẹt', related: 'Uống bia', language: 'vietnamese' },
+  233: { main: 'Trà sữa full topping', related: 'Nước ngọt', language: 'vietnamese' },
+  234: { main: 'Ăn no xỉu', related: 'No căng', language: 'vietnamese' },
+  235: { main: 'Thèm chết', related: 'Muốn ăn', language: 'vietnamese' },
+  236: { main: 'Ngán tận cổ', related: 'Chán ăn', language: 'vietnamese' },
+  237: { main: 'Đậm vị', related: 'Mặn mà', language: 'vietnamese' },
+  238: { main: 'Đi dạo', related: 'Dạo phố', language: 'vietnamese' },
+  239: { main: 'Đi bụi', related: 'Phượt', language: 'vietnamese' },
+  240: { main: 'Nằm nhà', related: 'Ở nhà', language: 'vietnamese' },
+  241: { main: 'Đi chơi khuya', related: 'Về trễ', language: 'vietnamese' },
+  242: { main: 'Kẹt cứng', related: 'Ùn xe', language: 'vietnamese' },
+  243: { main: 'Đi sớm cho chắc', related: 'Đến trước', language: 'vietnamese' },
+  244: { main: 'Drama căng', related: 'Lùm xùm lớn', language: 'vietnamese' },
+  245: { main: 'Hóng mệt nghỉ', related: 'Xem chuyện', language: 'vietnamese' },
+  246: { main: 'Hot hòn họt', related: 'Nổi tiếng', language: 'vietnamese' },
+  247: { main: 'Dính phốt to', related: 'Bị scandal', language: 'vietnamese' },
+  248: { main: 'Thả thính nhẹ', related: 'Gây chú ý', language: 'vietnamese' },
+  249: { main: 'Cảm nắng nhẹ', related: 'Thích thầm', language: 'vietnamese' },
+  250: { main: 'Xa mặt', related: 'Lạ dần', language: 'vietnamese' }
 }
 
 export function getRandomPair(): { name: string; pair: WordPair } {
