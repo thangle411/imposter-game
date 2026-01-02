@@ -26,6 +26,8 @@ function getPlayedWordPairKeys(): Set<string> {
 
 function markWordPairAsPlayed(key: string): void {
   try {
+    // we don't want to save key 0 because that's a placeholder
+    if(key === '0') return;
     const playedKeys = getPlayedWordPairKeys()
     playedKeys.add(key)
     localStorage.setItem(PLAYED_WORD_PAIRS_KEY, JSON.stringify(Array.from(playedKeys)))
