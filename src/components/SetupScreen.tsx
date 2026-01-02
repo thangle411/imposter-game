@@ -50,10 +50,15 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
   const [useRandomPair, setUseRandomPair] = useState<boolean>(false)
   const [customMainWord, setCustomMainWord] = useState<string>('')
   const [customRelatedWord, setCustomRelatedWord] = useState<string>('')
+  const [languageFilter, setLanguageFilter] = useState<'all' | 'english' | 'vietnamese'>('all')
 
-  // Get available word pairs (excluding played ones)
+  // Get available word pairs (excluding played ones and filtered by language)
   const playedKeys = getPlayedWordPairKeys()
-  const availableWordPairs = Object.entries(wordPairs).filter(([key]) => !playedKeys.has(key))
+  const availableWordPairs = Object.entries(wordPairs).filter(([key, pair]) => {
+    if (playedKeys.has(key)) return false
+    if (languageFilter === 'all') return true
+    return pair.language === languageFilter
+  })
   const availableWordPairKeys = availableWordPairs.map(([key]) => key)
   
   const [selectedWordPairKey, setSelectedWordPairKey] = useState<string>(availableWordPairKeys[0] || '')
@@ -66,8 +71,10 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
   useEffect(() => {
     if (availableWordPairKeys.length > 0 && !availableWordPairKeys.includes(selectedWordPairKey)) {
       setSelectedWordPairKey(availableWordPairKeys[0])
+    } else if (availableWordPairKeys.length === 0) {
+      setSelectedWordPairKey('')
     }
-  }, [availableWordPairKeys.join(',')])
+  }, [availableWordPairKeys.join(','), languageFilter])
 
   const handleStartGame = () => {
     let wordPair: WordPair
@@ -223,6 +230,24 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
           </div>
           {wordPairMode === 'select' ? (
             <>
+              <div className="space-y-2">
+                <label htmlFor="languageFilter" className="text-sm font-medium">
+                  Language Filter
+                </label>
+                <Select
+                  value={languageFilter}
+                  onValueChange={(value) => setLanguageFilter(value as 'all' | 'english' | 'vietnamese')}
+                >
+                  <SelectTrigger id="languageFilter" className="w-full h-12 text-base">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent onCloseAutoFocus={(e) => e.preventDefault()}>
+                    <SelectItem value="all">All</SelectItem>
+                    <SelectItem value="english">English</SelectItem>
+                    <SelectItem value="vietnamese">Vietnamese</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
               <div className="flex items-center space-x-2">
                 <input
                   type="checkbox"
@@ -241,7 +266,9 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
                 </label>
                 {availableWordPairs.length === 0 ? (
                   <div className="text-sm text-muted-foreground p-3 border rounded-md">
-                    All word pairs have been played. Please use custom words or clear localStorage to reset.
+                    {languageFilter === 'all' 
+                      ? 'All word pairs have been played. Please use custom words or clear localStorage to reset.'
+                      : `No ${languageFilter} word pairs available. Please select a different language or use custom words.`}
                   </div>
                 ) : (
                   <Select
