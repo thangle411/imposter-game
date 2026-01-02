@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { SetupScreen } from '@/components/SetupScreen'
-import { RoleRevealScreen } from '@/components/RoleRevealScreen'
+import { WordRevealScreen } from '@/components/WordRevealScreen'
 import { ResultsScreen } from '@/components/ResultsScreen'
 import { PlayersReadyScreen } from '@/components/PlayersReadyScreen'
 import type { Player, GameState, SetupData } from '@/types/game'
@@ -31,7 +31,7 @@ function App() {
 
     setGameState({
       players: playersWithWords,
-      phase: 'role-reveal',
+      phase: 'word-reveal',
       currentPlayerIndex: 0,
       realWord
     })
@@ -66,9 +66,9 @@ function App() {
     case 'setup':
       return <SetupScreen onStartGame={handleStartGame} />
 
-    case 'role-reveal':
+    case 'word-reveal':
       return (
-        <RoleRevealScreen
+        <WordRevealScreen
           players={gameState.players}
           onAllReady={handleAllReady}
         />

@@ -1,6 +1,6 @@
 export type Role = 'good-kitten' | 'confused-kitten' | 'spy-pup'
 
-export type GamePhase = 'setup' | 'role-reveal' | 'players-ready' | 'result-check'
+export type GamePhase = 'setup' | 'word-reveal' | 'players-ready' | 'result-check'
 
 export interface SetupData {
   totalPlayers: number;
