@@ -33,7 +33,7 @@ export function WordRevealScreen({ players, onAllReady }: WordRevealScreenProps)
 
   if (allReady) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-background">
+      <div className="min-h-screen flex items-center justify-center p-4 bg-background select-none">
         <Card className="w-full max-w-md">
           <CardHeader className="text-center">
             <CardTitle>Everyone is ready!</CardTitle>
@@ -46,13 +46,13 @@ export function WordRevealScreen({ players, onAllReady }: WordRevealScreenProps)
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center p-4 bg-background">
+      <div className="min-h-screen flex items-center justify-center p-4 bg-background select-none">
         <Card className="w-full max-w-md">
           {!showGenericCard ? 
           <CardContent>
             <CardHeader>
               <CardTitle className="text-2xl text-center">
-                Click the button to reveal your role.
+                Click the button to reveal your word.
               </CardTitle>
               <CardDescription className="text-lg text-center mb-4">
                 Good luck!

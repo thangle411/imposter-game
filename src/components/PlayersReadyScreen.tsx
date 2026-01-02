@@ -7,7 +7,7 @@ interface PlayersReadyScreenProps {
 
 export function PlayersReadyScreen({handleShowResults}: PlayersReadyScreenProps) {
     return (
-        <div className="min-h-screen flex items-center justify-center p-4 bg-background">
+        <div className="min-h-screen flex items-center justify-center p-4 bg-background select-none">
             <Card className="w-full max-w-md">
                 <CardHeader className="text-center">
                     <CardTitle className="text-3xl">Everyone is ready!</CardTitle>

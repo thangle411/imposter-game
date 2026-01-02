@@ -70,7 +70,7 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
   }, [availableWordPairKeys.join(',')])
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-background relative">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-background relative select-none">
       <Button
         variant="ghost"
         size="icon"
