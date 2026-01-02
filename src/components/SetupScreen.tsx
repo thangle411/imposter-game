@@ -70,7 +70,7 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
   }, [availableWordPairKeys.join(',')])
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-background overflow-y-scroll relative" style={{ scrollbarWidth: 'auto' }}>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-background relative">
       <Button
         variant="ghost"
         size="icon"
