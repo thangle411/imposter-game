@@ -69,6 +69,50 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
     }
   }, [availableWordPairKeys.join(',')])
 
+  const handleStartGame = () => {
+    let wordPair: WordPair
+    let wordPairKey: string | null = null
+    
+    if (wordPairMode === 'select') {
+      if (useRandomPair) {
+        // Get random pair from available (unplayed) pairs, excluding key "0" (placeholder)
+        const validPairs = availableWordPairs.filter(([key]) => key !== '0')
+        if (validPairs.length === 0) {
+          alert('All word pairs have been played! Please use custom words or clear localStorage.')
+          return
+        }
+        const randomIndex = Math.floor(Math.random() * validPairs.length)
+        const [key, pair] = validPairs[randomIndex]
+        wordPair = pair
+        wordPairKey = key
+      } else {
+        if (!selectedWordPairKey || !wordPairs[selectedWordPairKey]) {
+          alert('Please select a word pair or use custom words.')
+          return
+        }
+        wordPair = wordPairs[selectedWordPairKey]
+        wordPairKey = selectedWordPairKey
+      }
+    } else {
+      if (!customMainWord.trim() || !customRelatedWord.trim()) {
+        alert('Please enter both words')
+        return
+      }
+      wordPair = {
+        main: customMainWord.trim(),
+        related: customRelatedWord.trim()
+      }
+      // Custom words don't have keys, so we don't track them
+    }
+    
+    // Mark word pair as played if it has a key
+    if (wordPairKey) {
+      markWordPairAsPlayed(wordPairKey)
+    }
+    
+    onStartGame({ totalPlayers, spyPupCount, confusedKittenCount, wordPair })
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-background relative select-none">
       <Button
@@ -248,48 +292,7 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
             </>
           )}
           <Button
-            onClick={() => {
-              let wordPair: WordPair
-              let wordPairKey: string | null = null
-              
-              if (wordPairMode === 'select') {
-                if (useRandomPair) {
-                  // Get random pair from available (unplayed) pairs
-                  if (availableWordPairs.length === 0) {
-                    alert('All word pairs have been played! Please use custom words or clear localStorage.')
-                    return
-                  }
-                  const randomIndex = Math.floor(Math.random() * availableWordPairs.length)
-                  const [key, pair] = availableWordPairs[randomIndex]
-                  wordPair = pair
-                  wordPairKey = key
-                } else {
-                  if (!selectedWordPairKey || !wordPairs[selectedWordPairKey]) {
-                    alert('Please select a word pair or use custom words.')
-                    return
-                  }
-                  wordPair = wordPairs[selectedWordPairKey]
-                  wordPairKey = selectedWordPairKey
-                }
-              } else {
-                if (!customMainWord.trim() || !customRelatedWord.trim()) {
-                  alert('Please enter both words')
-                  return
-                }
-                wordPair = {
-                  main: customMainWord.trim(),
-                  related: customRelatedWord.trim()
-                }
-                // Custom words don't have keys, so we don't track them
-              }
-              
-              // Mark word pair as played if it has a key
-              if (wordPairKey) {
-                markWordPairAsPlayed(wordPairKey)
-              }
-              
-              onStartGame({ totalPlayers, spyPupCount, confusedKittenCount, wordPair })
-            }}
+            onClick={handleStartGame}
             className="w-full h-12 text-base"
             size="lg"
           >

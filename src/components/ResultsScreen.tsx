@@ -115,7 +115,7 @@ export function ResultsScreen({
               Cancel
             </Button>
             <Button onClick={handleConfirmPlayAgain}>
-              Play Again
+              Yes
             </Button>
           </DialogFooter>
         </DialogContent>
