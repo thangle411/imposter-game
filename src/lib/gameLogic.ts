@@ -1,7 +1,6 @@
 import type { Player, Role, SetupData } from '@/types/game'
-import { getRandomPair } from '@/data/words'
 
-export function assignRoles({ totalPlayers, spyPupCount, confusedKittenCount }: SetupData): Role[] {
+export function assignRoles({ totalPlayers, spyPupCount, confusedKittenCount }: Pick<SetupData, 'totalPlayers' | 'spyPupCount' | 'confusedKittenCount'>): Role[] {
   const roles: Role[] = []
 
   for (let i = 0; i < spyPupCount; i++) {
@@ -27,15 +26,14 @@ export function assignRoles({ totalPlayers, spyPupCount, confusedKittenCount }: 
 }
 
 export function assignWords(
-  players: Player[]
+  players: Player[],
+  wordPair: { main: string; related: string }
 ): { players: Player[]; realWord: string } {
-  const { pair } = getRandomPair()
-  
   const updatedPlayers = players.map(player => {
     if (player.role === 'good-kitten') {
-      return { ...player, word: pair.main }
+      return { ...player, word: wordPair.main }
     } else if (player.role === 'confused-kitten') {
-      return { ...player, word: pair.related }
+      return { ...player, word: wordPair.related }
     } else {
       // spy pup gets no word
       return { ...player, word: undefined }
@@ -44,6 +42,6 @@ export function assignWords(
   
   return {
     players: updatedPlayers,
-    realWord: pair.main
+    realWord: wordPair.main
   }
 }

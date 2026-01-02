@@ -5,7 +5,8 @@ export type GamePhase = 'setup' | 'role-reveal' | 'players-ready' | 'result-chec
 export interface SetupData {
   totalPlayers: number;
   spyPupCount: number;
-  confusedKittenCount: number
+  confusedKittenCount: number;
+  wordPair: WordPair;
 }
 
 export interface Player {

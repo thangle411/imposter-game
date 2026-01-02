@@ -14,7 +14,7 @@ function App() {
     currentPlayerIndex: 0,
   })
 
-  const handleStartGame = ({ totalPlayers, spyPupCount, confusedKittenCount }: SetupData) => {
+  const handleStartGame = ({ totalPlayers, spyPupCount, confusedKittenCount, wordPair }: SetupData) => {
     const players: Player[] = Array.from({ length: totalPlayers }, (_, i) => ({
       id: i + 1,
       name: `Player ${i + 1}`,
@@ -27,7 +27,7 @@ function App() {
       role: roles[index]
     }))
 
-    const { players: playersWithWords, realWord } = assignWords(playersWithRoles)
+    const { players: playersWithWords, realWord } = assignWords(playersWithRoles, wordPair)
 
     setGameState({
       players: playersWithWords,
