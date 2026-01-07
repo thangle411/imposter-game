@@ -118,7 +118,7 @@ export function TimerSettingsScreen({
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-background select-none">
+    <div className="min-h-screen flex items-center justify-center p-4 pt-20 bg-background select-none">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl">Timer Settings</CardTitle>

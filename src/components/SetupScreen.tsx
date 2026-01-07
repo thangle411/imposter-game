@@ -6,8 +6,6 @@ import { Input } from '@/components/ui/input'
 import { GAME_CONSTANTS } from '@/constants/game'
 import type { SetupData, WordPair } from '@/types/game'
 import { wordPairs } from '@/data/words'
-import { useTheme } from '@/lib/useTheme'
-import { Moon, Sun } from 'lucide-react'
 
 const PLAYED_WORD_PAIRS_KEY = 'imposter-game-played-word-pairs'
 
@@ -27,7 +25,7 @@ function getPlayedWordPairKeys(): Set<string> {
 function markWordPairAsPlayed(key: string): void {
   try {
     // we don't want to save key 0 because that's a placeholder
-    if(key === '0') return;
+    if (key === '0') return;
     const playedKeys = getPlayedWordPairKeys()
     playedKeys.add(key)
     localStorage.setItem(PLAYED_WORD_PAIRS_KEY, JSON.stringify(Array.from(playedKeys)))
@@ -41,7 +39,6 @@ interface SetupScreenProps {
 }
 
 export function SetupScreen({ onStartGame }: SetupScreenProps) {
-  const { theme, toggleTheme } = useTheme()
   const [totalPlayers, setTotalPlayers] = useState<number>(4)
   const [spyPupCount, setSpyPupCount] = useState<number>(GAME_CONSTANTS.maxSpyPupCount[totalPlayers])
   const [confusedKittenCount, setConfusedKittenCount] = useState<number>(GAME_CONSTANTS.maxConfusedKittenCount[totalPlayers])
@@ -60,12 +57,12 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
     return pair.language === languageFilter
   })
   const availableWordPairKeys = availableWordPairs.map(([key]) => key)
-  
+
   const [selectedWordPairKey, setSelectedWordPairKey] = useState<string>(availableWordPairKeys[0] || '')
 
   useEffect(() => {
     setGoodKittenCount(totalPlayers - spyPupCount - confusedKittenCount)
-  }, [totalPlayers, spyPupCount, confusedKittenCount])  
+  }, [totalPlayers, spyPupCount, confusedKittenCount])
 
   // Update selected key when available pairs change
   useEffect(() => {
@@ -79,7 +76,7 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
   const handleStartGame = () => {
     let wordPair: WordPair
     let wordPairKey: string | null = null
-    
+
     if (wordPairMode === 'select') {
       if (useRandomPair) {
         // Get random pair from available (unplayed) pairs, excluding key "0" (placeholder)
@@ -111,33 +108,20 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
       }
       // Custom words don't have keys, so we don't track them
     }
-    
+
     // Mark word pair as played if it has a key
     if (wordPairKey) {
       markWordPairAsPlayed(wordPairKey)
     }
-    
+
     onStartGame({ totalPlayers, spyPupCount, confusedKittenCount, wordPair })
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-background relative select-none">
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={toggleTheme}
-        className="absolute top-4 right-4 h-10 w-10 rounded-full"
-        aria-label="Toggle dark mode"
-      >
-        {theme === 'dark' ? (
-          <Sun className="h-5 w-5" />
-        ) : (
-          <Moon className="h-5 w-5" />
-        )}
-      </Button>
+    <div className="min-h-screen flex items-center justify-center p-4 pt-20 bg-background relative select-none">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="flex justify-center items-center"><img src='/logo.png' width={150}/></CardTitle>
+          <CardTitle className="flex justify-center items-center"><img src='/logo.png' width={150} /></CardTitle>
           <CardDescription className="text-base mt-2">
             Good kittens, confused kittens, and (a) spy pup(s)
           </CardDescription>
@@ -266,7 +250,7 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
                 </label>
                 {availableWordPairs.length === 0 ? (
                   <div className="text-sm text-muted-foreground p-3 border rounded-md">
-                    {languageFilter === 'all' 
+                    {languageFilter === 'all'
                       ? 'All word pairs have been played. Please use custom words or clear localStorage to reset.'
                       : `No ${languageFilter} word pairs available. Please select a different language or use custom words.`}
                   </div>

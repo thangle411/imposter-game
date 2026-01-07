@@ -69,10 +69,10 @@ export function ResultsScreen({
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-background select-none pb-24">
+    <div className="min-h-screen flex items-center justify-center p-4 pt-20 bg-background select-none pb-24">
       <Card className="w-full max-w-md">
         <div className="space-y-6 py-4">
-           <CardHeader className="spacy-y-1 p-2 mb-3">
+          <CardHeader className="spacy-y-1 p-2 mb-3">
             <CardTitle className="text-2xl text-center">
               Hold down to reveal word
             </CardTitle>
@@ -80,9 +80,8 @@ export function ResultsScreen({
           <div className="flex justify-center">
             <Badge
               variant="outline"
-              className={`text-5xl px-4 py-2 bg-green-500/20 text-green-700 dark:text-green-400 border-green-500/5 cursor-pointer select-none touch-none ${
-                !isHolding ? 'blur-sm' : ''
-              }`}
+              className={`text-5xl px-4 py-2 bg-green-500/20 text-green-700 dark:text-green-400 border-green-500/5 cursor-pointer select-none touch-none ${!isHolding ? 'blur-sm' : ''
+                }`}
               onPointerDown={handlePointerDown}
               onTouchStart={handleTouchStart}
               style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
@@ -91,7 +90,7 @@ export function ResultsScreen({
             </Badge>
           </div>
         </div>
-        
+
         <CardContent className="space-y-6 mt-4">
           <Button
             onClick={handlePlayAgainClick}

@@ -4,6 +4,7 @@ import { WordRevealScreen } from '@/components/WordRevealScreen'
 import { ResultsScreen } from '@/components/ResultsScreen'
 import { PlayersReadyScreen } from '@/components/PlayersReadyScreen'
 import { TimerSettingsScreen } from '@/components/TimerSettingsScreen'
+import { Header } from '@/components/Header'
 import type { Player, GameState, SetupData } from '@/types/game'
 import { assignRoles, assignWords } from '@/lib/gameLogic'
 
@@ -92,44 +93,66 @@ function App() {
   // Render appropriate screen based on phase
   switch (gameState.phase) {
     case 'setup':
-      return <SetupScreen onStartGame={handleStartGame} />
+      return (
+        <>
+          <Header />
+          <SetupScreen onStartGame={handleStartGame} />
+        </>
+      )
 
     case 'word-reveal':
       return (
-        <WordRevealScreen
-          players={gameState.players}
-          onAllReady={handleAllReady}
-        />
+        <>
+          <Header />
+          <WordRevealScreen
+            players={gameState.players}
+            onAllReady={handleAllReady}
+          />
+        </>
       )
 
     case 'players-ready':
       return (
-        <PlayersReadyScreen 
-          handleShowResults={handleShowResults}
-          onOpenTimerSettings={handleOpenTimerSettings}
-        />
+        <>
+          <Header />
+          <PlayersReadyScreen
+            handleShowResults={handleShowResults}
+            onOpenTimerSettings={handleOpenTimerSettings}
+          />
+        </>
       )
 
     case 'result-check':
       return (
-        <ResultsScreen
-          realWord={gameState.realWord}
-          onPlayAgain={handlePlayAgain}
-          onOpenTimerSettings={handleOpenTimerSettings}
-        />
+        <>
+          <Header />
+          <ResultsScreen
+            realWord={gameState.realWord}
+            onPlayAgain={handlePlayAgain}
+            onOpenTimerSettings={handleOpenTimerSettings}
+          />
+        </>
       )
 
     case 'timer-settings':
       return (
-        <TimerSettingsScreen
-          currentTimerMinutes={gameState.timerMinutes || 2}
-          onSave={handleSaveTimerSettings}
-          onCancel={handleCancelTimerSettings}
-        />
+        <>
+          <Header />
+          <TimerSettingsScreen
+            currentTimerMinutes={gameState.timerMinutes || 2}
+            onSave={handleSaveTimerSettings}
+            onCancel={handleCancelTimerSettings}
+          />
+        </>
       )
 
     default:
-      return <SetupScreen onStartGame={handleStartGame} />
+      return (
+        <>
+          <Header />
+          <SetupScreen onStartGame={handleStartGame} />
+        </>
+      )
   }
 }
 

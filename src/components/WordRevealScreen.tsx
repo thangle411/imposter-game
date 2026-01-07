@@ -19,10 +19,10 @@ export function WordRevealScreen({ players, onAllReady }: WordRevealScreenProps)
   const handleNext = () => {
     setShowGenericCard(prev => !prev)
     setReadyPlayers(prev => new Set(prev).add(currentPlayer.id))
-    
+
     if (currentPlayerIndex < players.length - 1) {
       setCurrentPlayerIndex(prev => prev + 1)
-    } 
+    }
   }
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export function WordRevealScreen({ players, onAllReady }: WordRevealScreenProps)
 
   if (allReady) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-background select-none">
+      <div className="min-h-screen flex items-center justify-center p-4 pt-20 bg-background select-none">
         <Card className="w-full max-w-md">
           <CardHeader className="text-center">
             <CardTitle>Everyone is ready!</CardTitle>
@@ -46,59 +46,59 @@ export function WordRevealScreen({ players, onAllReady }: WordRevealScreenProps)
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center p-4 bg-background select-none">
+      <div className="min-h-screen flex items-center justify-center p-4 pt-20 bg-background select-none">
         <Card className="w-full max-w-md">
-          {!showGenericCard ? 
-          <CardContent>
-            <CardHeader>
-              <CardTitle className="text-2xl text-center">
-                Click the button to reveal your word.
-              </CardTitle>
-              <CardDescription className="text-lg text-center mb-4">
-                Good luck!
-              </CardDescription>
-              <Button className='text-lg' onClick={() => setShowGenericCard(true)}>
-                I&apos;m Ready
-              </Button>
-            </CardHeader>
-          </CardContent> : 
-          <CardContent className="max-w-md mx-4">
-            <div className="space-y-6 py-4">
-              {currentPlayer.word ? (
-                <Card className="bg-muted/50">
-                  <CardHeader>
-                    <CardTitle className="text-center">Your Word</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-green-500 text-4xl font-bold text-center py-4">
-                      {currentPlayer.word}
-                    </div>
-                  </CardContent>
-                </Card>
-              ) : (
-                <Card className="bg-destructive/10 border-destructive/50">
-                  <CardHeader>
-                    <CardTitle className="text-center text-destructive">
-                      No Word
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-center text-muted-foreground py-4">
-                      You are the spy pup. You don&apos;t know the word!
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
+          {!showGenericCard ?
+            <CardContent>
+              <CardHeader>
+                <CardTitle className="text-2xl text-center">
+                  Click the button to reveal your word.
+                </CardTitle>
+                <CardDescription className="text-lg text-center mb-4">
+                  Good luck!
+                </CardDescription>
+                <Button className='text-lg' onClick={() => setShowGenericCard(true)}>
+                  I&apos;m Ready
+                </Button>
+              </CardHeader>
+            </CardContent> :
+            <CardContent className="max-w-md mx-4">
+              <div className="space-y-6 py-4">
+                {currentPlayer.word ? (
+                  <Card className="bg-muted/50">
+                    <CardHeader>
+                      <CardTitle className="text-center">Your Word</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-green-500 text-4xl font-bold text-center py-4">
+                        {currentPlayer.word}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <Card className="bg-destructive/10 border-destructive/50">
+                    <CardHeader>
+                      <CardTitle className="text-center text-destructive">
+                        No Word
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-center text-muted-foreground py-4">
+                        You are the spy pup. You don&apos;t know the word!
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
 
-              <Button
-                onClick={handleNext}
-                className="w-full h-12 text-base"
-                size="lg"
-              >
-                I&apos;m Ready
-              </Button>
-            </div>
-          </CardContent>}
+                <Button
+                  onClick={handleNext}
+                  className="w-full h-12 text-base"
+                  size="lg"
+                >
+                  I&apos;m Ready
+                </Button>
+              </div>
+            </CardContent>}
         </Card>
       </div>
     </>
