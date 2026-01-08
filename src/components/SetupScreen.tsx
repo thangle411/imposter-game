@@ -6,39 +6,17 @@ import { Input } from '@/components/ui/input'
 import { GAME_CONSTANTS } from '@/constants/game'
 import type { SetupData, WordPair } from '@/types/game'
 import { wordPairs } from '@/data/words'
+import { useAuth } from '@/lib/AuthContext'
+import { fetchSeenWords, markWordAsSeenOnServer } from '@/lib/api'
 
 const PLAYED_WORD_PAIRS_KEY = 'imposter-game-played-word-pairs'
-
-function getPlayedWordPairKeys(): Set<string> {
-  try {
-    const stored = localStorage.getItem(PLAYED_WORD_PAIRS_KEY)
-    if (stored) {
-      const keys = JSON.parse(stored) as string[]
-      return new Set(keys)
-    }
-  } catch (error) {
-    console.error('Error reading played word pairs from localStorage:', error)
-  }
-  return new Set<string>()
-}
-
-function markWordPairAsPlayed(key: string): void {
-  try {
-    // we don't want to save key 0 because that's a placeholder
-    if (key === '0') return;
-    const playedKeys = getPlayedWordPairKeys()
-    playedKeys.add(key)
-    localStorage.setItem(PLAYED_WORD_PAIRS_KEY, JSON.stringify(Array.from(playedKeys)))
-  } catch (error) {
-    console.error('Error saving played word pair to localStorage:', error)
-  }
-}
 
 interface SetupScreenProps {
   onStartGame: (setupData: SetupData) => void
 }
 
 export function SetupScreen({ onStartGame }: SetupScreenProps) {
+  const { user, jwt } = useAuth();
   const [totalPlayers, setTotalPlayers] = useState<number>(4)
   const [spyPupCount, setSpyPupCount] = useState<number>(GAME_CONSTANTS.maxSpyPupCount[totalPlayers])
   const [confusedKittenCount, setConfusedKittenCount] = useState<number>(GAME_CONSTANTS.maxConfusedKittenCount[totalPlayers])
@@ -48,6 +26,66 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
   const [customMainWord, setCustomMainWord] = useState<string>('')
   const [customRelatedWord, setCustomRelatedWord] = useState<string>('')
   const [languageFilter, setLanguageFilter] = useState<'all' | 'english' | 'vietnamese'>('all')
+  const [serverSeenWords, setServerSeenWords] = useState<number[]>([])
+
+  // Fetch seen words from server when user is logged in
+  useEffect(() => {
+    if (user && jwt) {
+      const loadSeenWords = async () => {
+        try {
+          const seenWords = await fetchSeenWords({ jwt })
+          setServerSeenWords(seenWords)
+        } catch (error) {
+          console.error('Failed to load seen words from server:', error)
+        }
+      }
+      loadSeenWords()
+    }
+  }, [user, jwt])
+
+  // Get played word pairs based on auth status
+  const getPlayedWordPairKeys = (): Set<string> => {
+    if (user && jwt && serverSeenWords.length > 0) {
+      // Use server data if logged in
+      return new Set(serverSeenWords.map(id => id.toString()))
+    } else {
+      // Fall back to localStorage
+      try {
+        const stored = localStorage.getItem(PLAYED_WORD_PAIRS_KEY)
+        if (stored) {
+          const keys = JSON.parse(stored) as string[]
+          return new Set(keys)
+        }
+      } catch (error) {
+        console.error('Error reading played word pairs from localStorage:', error)
+      }
+      return new Set<string>()
+    }
+  }
+
+  const markWordPairAsPlayed = async (wordPairKey: string): Promise<void> => {
+    try {
+      if (user && jwt) {
+        // Save to server if logged in
+        const wordId = parseInt(wordPairKey)
+        await markWordAsSeenOnServer({ wordId, jwt })
+        // Update local state to reflect the change
+        setServerSeenWords(prev => [...prev, wordId])
+      } else {
+        // Save to localStorage if not logged in
+        try {
+          const stored = localStorage.getItem(PLAYED_WORD_PAIRS_KEY)
+          const playedKeys = stored ? new Set(JSON.parse(stored) as string[]) : new Set<string>()
+          playedKeys.add(wordPairKey)
+          localStorage.setItem(PLAYED_WORD_PAIRS_KEY, JSON.stringify(Array.from(playedKeys)))
+        } catch (error) {
+          console.error('Error saving played word pair to localStorage:', error)
+        }
+      }
+    } catch (error) {
+      console.error('Error saving played word pair to localStorage:', error)
+    }
+  }
 
   // Get available word pairs (excluding played ones and filtered by language)
   const playedKeys = getPlayedWordPairKeys()
@@ -71,9 +109,9 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
     } else if (availableWordPairKeys.length === 0) {
       setSelectedWordPairKey('')
     }
-  }, [availableWordPairKeys.join(','), languageFilter])
+  }, [availableWordPairKeys.join(','), languageFilter, serverSeenWords.length])
 
-  const handleStartGame = () => {
+  const handleStartGame = async () => {
     let wordPair: WordPair
     let wordPairKey: string | null = null
 
@@ -110,7 +148,7 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
     }
 
     // Mark word pair as played if it has a key
-    if (wordPairKey) {
+    if (wordPairKey && wordPairKey !== '0') {
       markWordPairAsPlayed(wordPairKey)
     }
 

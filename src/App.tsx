@@ -7,8 +7,9 @@ import { TimerSettingsScreen } from '@/components/TimerSettingsScreen'
 import { Header } from '@/components/Header'
 import type { Player, GameState, SetupData } from '@/types/game'
 import { assignRoles, assignWords } from '@/lib/gameLogic'
+import { AuthProvider } from '@/lib/AuthContext'
 
-function App() {
+function AppContent() {
   const [gameState, setGameState] = useState<GameState>({
     players: [],
     phase: 'setup',
@@ -154,6 +155,14 @@ function App() {
         </>
       )
   }
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  )
 }
 
 export default App

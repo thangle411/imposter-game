@@ -1,8 +1,19 @@
-import { useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
 import { account } from './appwrite';
 import type { Models, OAuthProvider } from 'appwrite';
 
-export function useAuth() {
+interface AuthContextType {
+    user: Models.User<Models.Preferences> | null;
+    loading: boolean;
+    jwt: string | null;
+    loginWithGoogle: () => Promise<void>;
+    logout: () => Promise<void>;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export function AuthProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<Models.User<Models.Preferences> | null>(null);
     const [loading, setLoading] = useState(true);
     const [jwt, setJwt] = useState<string | null>(null);
@@ -17,6 +28,7 @@ export function useAuth() {
             setUser(currentUser);
             const jwtResponse = await account.createJWT();
             setJwt(jwtResponse.jwt);
+            console.log("jwt", jwtResponse.jwt);
         } catch (error) {
             setUser(null);
             setJwt(null);
@@ -47,11 +59,17 @@ export function useAuth() {
         }
     };
 
-    return {
-        user,
-        loading,
-        jwt,
-        loginWithGoogle,
-        logout,
-    };
+    return (
+        <AuthContext.Provider value={{ user, loading, jwt, loginWithGoogle, logout }}>
+            {children}
+        </AuthContext.Provider>
+    );
+}
+
+export function useAuth() {
+    const context = useContext(AuthContext);
+    if (context === undefined) {
+        throw new Error('useAuth must be used within an AuthProvider');
+    }
+    return context;
 }

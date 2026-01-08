@@ -92,6 +92,17 @@ The remaining players are always Good Kittens.
 npm install
 ```
 
+### Environment Variables
+
+Create a `.env` file in the root directory (copy from `.env.example`):
+
+```bash
+VITE_API_BASE_URL=http://localhost:3000/api
+```
+
+**Environment Variables:**
+- `VITE_API_BASE_URL` - Base URL for the backend API (used for syncing seen words for authenticated users)
+
 ### Development
 
 ```bash
@@ -154,5 +165,7 @@ Roles are randomly shuffled and assigned to players based on the configuration:
 - ✅ Word pair selection or custom words
 - ✅ Random word pair selection
 - ✅ Played word pair tracking (localStorage)
+- ✅ Google OAuth authentication (via Appwrite)
+- ✅ Server-synced seen words for authenticated users
 - ✅ Responsive design
 - ✅ Dark mode support
