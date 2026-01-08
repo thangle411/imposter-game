@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { GAME_CONSTANTS } from '@/constants/game'
 import type { SetupData, WordPair } from '@/types/game'
 import { wordPairs } from '@/data/words'
@@ -163,6 +164,110 @@ export function SetupScreen({ onStartGame }: SetupScreenProps) {
           <CardDescription className="text-base mt-2">
             Good kittens, confused kittens, and (a) spy pup(s)
           </CardDescription>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="mt-2">
+                Read Rules
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>Game Rules</DialogTitle>
+                <DialogDescription>
+                  How to play the Imposter Game
+                </DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4 text-sm">
+                <section>
+                  <h3 className="font-semibold text-base mb-2">Game Overview</h3>
+                  <p className="mb-2">In this game, players are assigned different roles with different knowledge:</p>
+                  <ul className="list-disc pl-6 space-y-1">
+                    <li><strong>Good Kittens</strong>: Know the real word and must help identify the imposters</li>
+                    <li><strong>Confused Kittens</strong>: Know a related (but different) word, making them appear suspicious</li>
+                    <li><strong>Spy Pups</strong>: Don't know any word and must blend in without revealing their ignorance</li>
+                  </ul>
+                  <p className="mt-2">The goal is for the Good Kittens to identify the Spy Pups, while the Spy Pups try to avoid detection.</p>
+                </section>
+
+                <section>
+                  <h3 className="font-semibold text-base mb-2">How to Play</h3>
+
+                  <div className="space-y-3">
+                    <div>
+                      <h4 className="font-semibold">Setup Phase</h4>
+                      <ol className="list-decimal pl-6 space-y-1">
+                        <li>Select the number of players (4-12)</li>
+                        <li>Choose how many Spy Pups you want (varies by player count)</li>
+                        <li>Choose how many Confused Kittens you want (varies by player count)</li>
+                        <li>Select a word pair:
+                          <ul className="list-disc pl-6 mt-1">
+                            <li>Choose from existing word pairs</li>
+                            <li>Or enter custom words</li>
+                            <li>Option to randomly select from unplayed word pairs</li>
+                          </ul>
+                        </li>
+                      </ol>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold">Role Reveal Phase</h4>
+                      <ul className="list-disc pl-6 space-y-1">
+                        <li>Each player takes turns viewing their role and word (if they have one)</li>
+                        <li>Players must keep their role and word secret</li>
+                        <li>Spy Pups will see "No Word" instead of a word</li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold">Clue Phase</h4>
+                      <ul className="list-disc pl-6 space-y-1">
+                        <li>Each player gives one word clue related to their given word</li>
+                        <li>Players must not repeat another player's clue</li>
+                        <li>Players must not say the given word itself</li>
+                        <li>Spy Pups must give a clue without knowing the word, making this phase crucial for detection</li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold">Discussion Phase</h4>
+                      <ul className="list-disc pl-6 space-y-1">
+                        <li>Good Kittens try to identify who doesn't know the word</li>
+                        <li>Spy Pups try to blend in and guess the word</li>
+                        <li>Confused Kittens may seem suspicious because they know a different word</li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold">Elimination Phase</h4>
+                      <ul className="list-disc pl-6 space-y-1">
+                        <li>After each discussion phase, all players vote to eliminate one player</li>
+                        <li><strong>If a Spy Pup is eliminated:</strong>
+                          <ul className="list-disc pl-6 mt-1">
+                            <li>The eliminated Spy Pup can attempt to guess the word</li>
+                            <li>If they guess correctly, the Spy Pups and Confused Kittens win the game</li>
+                            <li>If they guess incorrectly, the game continues with the remaining players</li>
+                          </ul>
+                        </li>
+                        <li><strong>If a Good Kitten or Confused Kitten is eliminated:</strong>
+                          <ul className="list-disc pl-6 mt-1">
+                            <li>The eliminated player must reveal themselves by checking against the real word in the app</li>
+                            <li>The game continues with the remaining players</li>
+                          </ul>
+                        </li>
+                        <li>The game continues with alternating Discussion and Elimination phases until only 2 players remain. Start with the person to the left of the eliminated player.</li>
+                        <li><strong>End Game Condition:</strong>
+                          <ul className="list-disc pl-6 mt-1">
+                            <li>If both remaining players are Good Kittens, the Good Kittens win</li>
+                            <li>If both remaining players are not Good Kittens (i.e., at least one is a Spy Pup or Confused Kitten), the Spy Pups and Confused Kittens win</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </DialogContent>
+          </Dialog>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
