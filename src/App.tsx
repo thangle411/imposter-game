@@ -67,6 +67,16 @@ function AppContent() {
     })
   }
 
+  const handleSkipWord = () => {
+    setGameState({
+      players: [],
+      phase: 'setup',
+      currentPlayerIndex: 0,
+      realWord: '',
+      timerMinutes: gameState.timerMinutes || 2
+    })
+  }
+
   const handleOpenTimerSettings = () => {
     setPreviousPhase(gameState.phase)
     setGameState(prev => ({
@@ -108,6 +118,7 @@ function AppContent() {
           <WordRevealScreen
             players={gameState.players}
             onAllReady={handleAllReady}
+            onSkip={handleSkipWord}
           />
         </>
       )

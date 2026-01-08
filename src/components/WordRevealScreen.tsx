@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import type { Player } from '@/types/game'
 
 interface WordRevealScreenProps {
   players: Player[]
   onAllReady: () => void
+  onSkip: () => void
 }
 
-export function WordRevealScreen({ players, onAllReady }: WordRevealScreenProps) {
+export function WordRevealScreen({ players, onAllReady, onSkip }: WordRevealScreenProps) {
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0)
   const [readyPlayers, setReadyPlayers] = useState<Set<number>>(new Set())
   const [showGenericCard, setShowGenericCard] = useState(false);
+  const [showSkipDialog, setShowSkipDialog] = useState(false);
 
   const currentPlayer = players[currentPlayerIndex]
   const allReady = readyPlayers.size === players.length
@@ -97,10 +100,41 @@ export function WordRevealScreen({ players, onAllReady }: WordRevealScreenProps)
                 >
                   I&apos;m Ready
                 </Button>
+
+                <Button
+                  onClick={() => setShowSkipDialog(true)}
+                  variant="link"
+                  className="w-full text-sm"
+                  size="sm"
+                >
+                  Skip Word
+                </Button>
               </div>
             </CardContent>}
         </Card>
       </div>
+
+      <Dialog open={showSkipDialog} onOpenChange={setShowSkipDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Skip this word?</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to skip this word and return to the setup screen? All current progress will be lost.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowSkipDialog(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => {
+              setShowSkipDialog(false)
+              onSkip()
+            }}>
+              Skip Word
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   )
 }
